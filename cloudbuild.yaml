@@ -15,7 +15,7 @@ steps:
     args:
       - run
       - deploy
-      - second-service
+      - latest-container
       - '--image'
       - 'northamerica-northeast2-docker.pkg.dev/molten-unison-462818-r2/app-repo/hello-world:$COMMIT_SHA'
       - '--region'
