@@ -5,7 +5,7 @@ app = FastAPI()
 
 @app.get("/")
 def read_root():
-    return {"message": "Hello World from Cloud Runw!", "version": "1.0"}
+    return {"message": "Hello World from Cloud Run!", "version": "1.0"}
 
 @app.get("/health")
 def health_check():
