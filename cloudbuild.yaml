@@ -1,0 +1,32 @@
+steps:
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - build
+      - '-t'
+      - 'northamerica-northeast1-docker.pkg.dev/test/app-repo/hello-world:$COMMIT_SHA'
+      - .
+    id: Build Container Image
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - push
+      - 'northamerica-northeast1-docker.pkg.dev/test/app-repo/hello-world:$COMMIT_SHA'
+    id: Push Image to Artifact Registry
+  - name: gcr.io/cloud-builders/gcloud
+    args:
+      - run
+      - deploy
+      - hello-world-service
+      - '--image'
+      - 'northamerica-northeast1-docker.pkg.dev/test/app-repo/hello-world:$COMMIT_SHA'
+      - '--region'
+      - northamerica-northeast1
+      - '--platform'
+      - managed
+      - '--timeout'
+      - '300'
+      - '--allow-unauthenticated'
+    id: Deploy Container on Google Cloud Run
+images:
+  - 'northamerica-northeast1-docker.pkg.dev/test/app-repo/hello-world:$COMMIT_SHA'
+options:
+  logging: CLOUD_LOGGING_ONLY
