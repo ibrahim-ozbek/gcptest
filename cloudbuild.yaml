@@ -15,7 +15,7 @@ steps:
     args:
       - run
       - deploy
-      - hello-world-service
+      - my-service
       - '--image'
       - 'northamerica-northeast2-docker.pkg.dev/molten-unison-462818-r2/app-repo/hello-world:$COMMIT_SHA'
       - '--region'
@@ -24,7 +24,7 @@ steps:
       - managed
       - '--timeout'
       - '300'
-      - '--allow-unauthenticated'
+      - --allow-unauthenticated
     id: Deploy Container on Google Cloud Run
 images:
   - 'northamerica-northeast2-docker.pkg.dev/molten-unison-462818-r2/app-repo/hello-world:$COMMIT_SHA'
